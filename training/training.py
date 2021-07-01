@@ -5,6 +5,9 @@ import gym
 from gym.wrappers import FrameStack
 
 import datetime
+from pathlib import Path
+
+import gym_mupen64plus
 
 from logger import MetricLogger
 from mariokart import MarioKart

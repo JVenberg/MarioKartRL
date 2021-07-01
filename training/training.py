@@ -30,7 +30,7 @@ print()
 
 save_dir = Path("checkpoints") / datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
 save_dir.mkdir(parents=True)
-mario = MarioKart(state_dim=(4, 64, 64), action_dim=env.action_space.nvec.shape[0], save_dir=save_dir)
+mario = MarioKart(env, save_dir=save_dir)
 
 logger = MetricLogger(save_dir)
 

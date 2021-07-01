@@ -10,9 +10,8 @@ from collections import deque
 from model import MarioKartNet
 
 class MarioKart:
-    def __init__(self, state_dim, action_dim, save_dir):
-        self.state_dim = state_dim
-        self.action_dim = action_dim
+    def __init__(self, env, save_dir):
+        self.env = env
         self.save_dir = save_dir
 
         self.use_cuda = torch.cuda.is_available()
@@ -49,11 +48,11 @@ class MarioKart:
         Inputs:
         state(LazyFrame): A single observation of the current state, dimension is (state_dim)
         Outputs:
-        action_idx (int): An integer representing which action Mario will perform
+        action (int): An integer representing which action Mario will perform
         """
         # EXPLORE
         if np.random.rand() < self.exploration_rate:
-            action_idx = np.random.randint(self.action_dim)
+            action = self.env.action_space.sample()
 
         # EXPLOIT
         else:
@@ -64,7 +63,8 @@ class MarioKart:
                 state = torch.tensor(state)
             state = state.unsqueeze(0)
             action_values = self.net(state, model="online")
-            action_idx = torch.argmax(action_values, axis=1).item()
+            action = torch.round(action_values)
+            print(action)
 
         # decrease exploration_rate
         self.exploration_rate *= self.exploration_rate_decay
@@ -72,7 +72,7 @@ class MarioKart:
 
         # increment step
         self.curr_step += 1
-        return action_idx
+        return action
 
     def cache(self, state, next_state, action, reward, done):
         """

@@ -8,7 +8,7 @@ import datetime
 
 from logger import MetricLogger
 from mariokart import MarioKart
-from wrappers import SkipFrame, GrayScaleObservation, ResizeObservation, FrameStack
+from wrappers import SkipFrame, GrayScaleObservation, ResizeObservation
 
 
 env = gym.make('Mario-Kart-Luigi-Raceway-v0')

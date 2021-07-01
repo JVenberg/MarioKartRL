@@ -61,7 +61,7 @@ for e in range(episodes):
         state = next_state
 
         # Check if end of game
-        if done or info["flag_get"]:
+        if done:
             break
 
     logger.log_episode()

@@ -62,5 +62,5 @@ services:
       - type: bind
         source: "${TRAINING_PROGRAMS}" # Since ROMs are not included in the image, bind mount a local path (set this value in the .env file)
         target: /src/gym-mupen64plus/training
-    command: [ 'python3', '-u', 'gym-mupen64plus/training/test_gym.py' ] # -u for unbuffered output so logs show immediately (in theory)
+    command: [ 'python3', '-u', 'gym-mupen64plus/training/training.py' ] # -u for unbuffered output so logs show immediately (in theory)
     depends_on: [ xvfbsrv ]

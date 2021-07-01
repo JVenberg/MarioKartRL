@@ -20,7 +20,7 @@ env.reset()
 # Apply Wrappers to environment
 env = SkipFrame(env, skip=4)
 env = GrayScaleObservation(env)
-env = ResizeObservation(env, shape=84)
+env = ResizeObservation(env, shape=64)
 env = FrameStack(env, num_stack=4)
 
 
@@ -30,8 +30,7 @@ print()
 
 save_dir = Path("checkpoints") / datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
 save_dir.mkdir(parents=True)
-
-mario = MarioKart(state_dim=(4, 84, 84), action_dim=env.action_space.n, save_dir=save_dir)
+mario = MarioKart(state_dim=(4, 64, 64), action_dim=env.action_space.nvec.shape[0], save_dir=save_dir)
 
 logger = MetricLogger(save_dir)
 

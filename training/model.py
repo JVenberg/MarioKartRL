@@ -23,7 +23,7 @@ class MarioKartNet(nn.Module):
         self.fc2 = nn.Linear(1164, 100)
         self.fc3 = nn.Linear(100, 50)
         self.fc4 = nn.Linear(50, 10)
-        self.fc5 = nn.Linear(10, 2)
+        self.fc5 = nn.Linear(10, 5)
 
     def forward(self, x):
         x = self.conv1(x)

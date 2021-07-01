@@ -18,7 +18,7 @@ class MarioKart:
         self.use_cuda = torch.cuda.is_available()
 
         # Mario's DNN to predict the most optimal action - we implement this in the Learn section
-        self.net = MarioKartNet(self.state_dim, self.action_dim).float()
+        self.net = MarioKartNet().float()
         if self.use_cuda:
             self.net = self.net.to(device="cuda")
 

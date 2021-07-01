@@ -64,7 +64,6 @@ class MarioKart:
             state = state.unsqueeze(0)
             action_values = self.net(state, model="online")
             action = torch.round(action_values)
-            print(action)
 
         # decrease exploration_rate
         self.exploration_rate *= self.exploration_rate_decay

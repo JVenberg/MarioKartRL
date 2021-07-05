@@ -34,7 +34,7 @@ mario = MarioKart(env, save_dir=save_dir)
 
 logger = MetricLogger(save_dir)
 
-episodes = 10
+episodes = 50000
 for e in range(episodes):
 
     state = env.reset()

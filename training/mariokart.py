@@ -53,6 +53,7 @@ class MarioKart:
         # EXPLORE
         if np.random.rand() < self.exploration_rate:
             action = self.env.action_space.sample()
+            print('Explore', action)
 
         # EXPLOIT
         else:
@@ -62,8 +63,10 @@ class MarioKart:
             else:
                 state = torch.tensor(state)
             state = state.unsqueeze(0)
-            action_values = self.net(state, model="online")
-            action = torch.round(action_values)
+            action_values = self.net(state, model="online")[0]
+            action = torch.round(action_values).detach().numpy()
+            print('Exploit', action)
+
 
         # decrease exploration_rate
         self.exploration_rate *= self.exploration_rate_decay
@@ -111,6 +114,9 @@ class MarioKart:
         return state, next_state, action.squeeze(), reward.squeeze(), done.squeeze()
 
     def td_estimate(self, state, action):
+        print(self.net(state, model="online"))
+        print(np.arange(0, self.batch_size))
+        print(action)
         current_Q = self.net(state, model="online")[
             np.arange(0, self.batch_size), action
         ]  # Q_online(s,a)
